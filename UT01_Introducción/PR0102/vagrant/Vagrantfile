@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+vagrant.configure("2") do |config|
+
+  config.vm.define "win2019" do | w19|
+      w19.vm.box = "StefanScherer/windows_2019"
+      w19.vm.network "private_network", ip: "172.19.0.10" 
+      w19.vm.provider "virtualbox" do |vb|
+          vb.name = "windows server 2019"
+          vb.memory = 4192
+          vb.cpus = 4
+        end
+  end 
+
+  config.vm.define "win10" do | w10|
+      w10.vm.box = "scotch/box"
+      w10.vm.network "private_network", ip: "172.19.0.11" 
+      w10.vm.provider "virtualbox" do |vb|
+          vb.name = "windows 10"
+          vb.memory = 2048
+          vb.cpus = 2
+        end
+  end 
+  
+end
