@@ -1,3 +1,5 @@
+
+```
 1.-
 
     1.
@@ -62,8 +64,6 @@ b)
 5) su cyal1, echo hola>prueba, su cyal2, rm prueba, no se puede borrar el fichero.
 6) Sticky bit te permite crear archivos y que los demas usuarios puedan leerlos pero no pueden borrarlos o modificarlos.
 Para eliminar algún fichero tendría que ser propietario del fichero.
+```
 
-5.-
-
-1) 
 
