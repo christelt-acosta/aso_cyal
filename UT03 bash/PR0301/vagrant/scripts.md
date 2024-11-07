@@ -37,4 +37,7 @@ EJERCICIO 3:
     fi
 
     EJERCICIO 4:
-    
+    while [ $(($n % 2)) -eq 0 ] 
+        do
+                echo "$n"
+        done
