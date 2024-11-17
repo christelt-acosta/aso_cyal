@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "linux0" do | ub|
+    ub.vm.box = "generic/ubuntu2204"
+    ub.vm.provider "virtualbox" do |vb|
+        vb.name = "ubuntu2204"
+        vb.memory = 2048
+        vb.cpus = 2
+      end
+end 
+
+  config.vm.define "linux" do | ub1|
+      ub1.vm.box = "generic/ubuntu2204"
+      ub1.vm.provider "virtualbox" do |vb|
+          vb.name = "ubuntu220401"
+          vb.memory = 2048
+          vb.cpus = 2
+        end
+  end 
+
+end
