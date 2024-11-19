@@ -1,37 +1,60 @@
+```
 #!/bin/bash
+
 #Para pedir una ip al usuario
 echo -e "\e[34mEscribe una dirección IP en formato CIDR (p.e. 192.168.1.0/24). La máscara debe ser /8, /16 o /24.\e[0m"
 read direccionip
+
 #Separar la ip de la máscara
 red=$( echo $direccionip | cut -d '/' -f 1)
 mascara=$(echo $direccionip | cut -d '/' -f 2)
+
 #Saber si la máscara es /8, /16 o /24
 while [[ $mascara != '8' && $mascara != '16' && $mascara != '24' ]]
 do
+#si no es /8, /16 o /24 vuelve a pedir la ip
         echo -e "\e[31mLa máscara que has introducido no es /8, /16 ni /24. Ingresa una máscara válida.\e[0m"
         echo -e "\e[34mEscribe una dirección IP en formato CIDR (p.e. 192.168.1.0/24).\e[0m"
         read direccionip
         red=$(echo $direccionip | cut -d '/' -f 1)
         mascara=$(echo $direccionip | cut -d '/' -f 2)
 done
+
 #Con esto vamos a separar cada octeto de la IP
 IFS='.' read -r -a octeto <<< $red
-#Ahora vamos a hacer ping a cada una de las direcciones ip, para saber si hay equipos con esa ip
-#y esas IPs las vamos a guardar en un archivo para luego detectar los puertos abiertos
+#con la -a se guarda en un array y luego se llama asi, ${octeto[n]}, el primer octeto es ${octeto[0]}
+
+
+#Ahora vamos a hacer ping para saber si hay equipos activos en esa red
+#las IPs activas las vamos a guardar en un archivo para luego detectar los puertos abiertos
 ipsa="ips_activas.txt"
-#y los puertos abiertos los guardaremos en un archivo
+
+#también guardaremos los puertos abiertos en un archivo
 puertos_abiertos="puertos_abiertos.txt"
+
 #vamos a limpiar estos archivos cada vez que empiece el script
 > $ipsa
 > $puertos_abiertos
+
+#Ahora vamos a usar un if para poder recorrer por todas las IPs de la red
+#si es mascara 24 solo se recorrera el ultimo octeto
 if [ $mascara = '24' ]
 then
-        for i in {1..254}
+        for i in {100..104}
         do
-        ip="${octeto[0]}.${octeto[1]}.${octeto[2]}.$i"
-        echo "Haciendo ping a $ip..."
-        ping -c 1 -w 1 $ip > /dev/null && echo -e "\e[32m$ip está activo\e[0m" && echo $ip >> $ipsa
+        #Aqui formaremos la ip
+        #para ello llamamos los arrays que guardamos antes
+        #y el ultimo octeto será el valor de la i del bucle for
+                ip="${octeto[0]}.${octeto[1]}.${octeto[2]}.$i"
+                echo "Haciendo ping a $ip..."
+        #ahora haremos ping a cada ip
+        #si el ping se realiza, se ejecuta el segundo comando
+        #y se escribirá en pantalla la ip de los equipos activos
+                ping -c 1 -w 1 $ip > /dev/null && echo -e "\e[32m$ip está activo\e[0m" && echo $ip >> $ipsa
+        #estas ips se guardaran en el archivo que creamos anteriormente
         done
+
+#haremos lo mismo con las redes de mascara 16
 elif [ $mascara = '16' ]
 then
         for i in {1..254}
@@ -43,6 +66,8 @@ then
                 ping -c 1 -w 1 $ip > /dev/null && echo -e "\e[32m$ip está activo\e[0m" && echo $ip >> $ipsa
                 done
         done
+
+#y con las de mascara 8
 elif [ $mascara = '8' ]
 then
         for i in {1..254}
@@ -58,56 +83,82 @@ then
                 done
         done
 fi
+
+
+
 #Vamos a pedir al usuario los puertos para verificar si están abiertos en las IPs que están activas
 echo -e "\e[34mIntroduce los puertos que quieres escanear separados por espacios (p.e. 22 80 443...)\e[0m"
 read puertos
+
 #Para saber que servicio tiene cada puerto, vamos a usar el archivo tcp.csv
 tcp_csv="tcp.csv"
-#Ahora vemos a leer cada linea del archivo ips_activas para ver si los puertos
+echo "Puertos abiertos: "
+
+#Ahora vamos a leer cada linea del archivo ips_activas para ver si los puertos
 #que el usuario nos pasó están activos en esas IPs
 while IFS= read -r ip
 do
-#ahora vamos a escanear los puertos que nos dio el usuario
+#escaneamos los puertos que nos dio el usuario
         for puerto in $puertos
         do
+        #Usamos el comando nc para escanear los puertos
+        #el 2>&1 se utiliza para obtener todas las salidas, tanto como las que tuvieron exito como las que no
                 result=$( nc -zv -w 1 $ip $puerto 2>&1 )
+        #Para saber para qué servicio se usa ese puerto usaremos grep y buscará en el archivo tcp_csv
                 servicio=$( grep ",$puerto," "$tcp_csv" | cut -d ',' -f 3 | tr -d '"' )
+        #con el grep buscaremos las salidas que tuvieron exito
                 if echo $result | grep -q 'succeeded'
                 then
+        #ahora se muestran por pantalla y luego se escriben en el archivo puertos_abiertos
                 respuesta=$( echo -e "\e[32m$ip puerto $puerto ($servicio) abierto.\e[0m")
                 echo $respuesta >> $puertos_abiertos
                 echo $respuesta
                 fi
         done
 done < $ipsa
+
+
+
 #Para la deteccion de sistemas operativos
+echo "Sistemas operativos de las direcciones encontradas: "
+#crearemos un archivo para guardar la informacion de los sistemas operativos en IPas activas
 sistema="sistema_operativo.txt"
+#Limpiamos el archivo cada vez que empiece el script
 > $sistema
+#Por cada ip se hará un ping y si nos sale TTL=64 es Linux
+#y si nos sale TTL=128 significa que el dispostivo es windows
 while IFS= read -r ip
 do
+#hacemos ping y con el grep sacamos la linea de TTL
         resultado_ttl=$(ping -c 1 -w 1 $ip | grep ttl )
+#si el TTL es 644, escribe en pantalla que la ip tiene sistema operativo linux
         if echo $resultado_ttl | grep -q 'ttl=64'
         then
                 rsistema=$(echo -e "\e[33m$ip: Tiene Sistema Operativo Linux. \e[0m")
                 echo $rsistema
+#si no es TTL=64 y es TTL=1128, escribirá en pantalla que es Windows
         elif echo $resultado_ttl | grep -q 'ttl=128'
         then
                 rsistema=$( echo -e "\e[33m$ip: Tiene Sistema Operativo Windows. \e[0m" )
                 echo $rsistema
         else
+#Si no es ninguna de las 2 IP's, se reconocerá  como un sistema  desconocido.
                 rsistema=$( echo -e "\e[33m$ip Sistema Operativo desconocido. \e[0m " )
                 echo $rsistema
-        fi
+        fo
+#despues escribirá cada sistema operativo de las IPs encontradas en un archivo
         echo $rsistema >> $sistema
 done < $ipsa
 
 
-#Para guardar todos los datos en un unico archivo de salida:
+#Para guardar todos los datos en un unico archivo de salida, se le pide al usuario el nombre el archivo
 echo -e "\e[34mEscribe el nombre del archivo de salida donde se guardarán todos los datos: \e[0m"
 read file
 archivo_salida="$file.txt"
+#Si el archivo existe, primero lo limpiamos
 > $archivo_salida
-echo -e "\e[32m--- Resultados del Escaneo ---\e[0m" >> $archivo_salida     
+#Ahora, esto es lo que aparecerá en el archvo de salida:
+echo -e "\e[32m--- Resultados del Escaneo ---\e[0m" >> $archivo_salida
 echo -e "Escaneo realizado:\e[34m $(date)\e[0m" >> $archivo_salida
 echo "" >> $archivo_salida
 
@@ -126,6 +177,7 @@ echo "Sistemas operativos detectados:" >> $archivo_salida
 cat $sistema >> $archivo_salida  #con esto se guarda el contenido de sistema_operativo.txt
 echo "" >> $archivo_salida
 
-# Mensaje final por pantalla y en el archivo
+# Mensaje final por pantalla y en el archivo salida
 echo -e "\e[31mEscaneo completado.\e[0m"
 echo -e "\e[31mTodos los resultados han sido guardados en $archivo_salida.\e[0m"
+```
