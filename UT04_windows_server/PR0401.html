@@ -1,33 +1,66 @@
-# PR0401: Introducción a powershell
-1. Obtén ejemplos de utilización del comando Get-LocalUser.
-![alt text](image.png)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a PowerShell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
 
-2. Obtén un listado de todos los comandos relacionados con la gestión de usuarios locales (es decir, con el nombre LocalUser).
-![alt text](image-1.png)
+    <h1>PR0401: Introducción a PowerShell</h1>
 
-3. Utilizando la línea de comandos, muestra en el navegador la ayuda del comando Get-LocalUser.
-![alt text](image-2.png)
+    <h2>1. Obtén ejemplos de utilización del comando Get-LocalUser</h2>
+    <img src="image.png" alt="Ejemplo de Get-LocalUser">
 
-4. Averigua para qué sirve el comando Set-Content y explícalo brevemente con tus palabras.
+    <h2>2. Obtén un listado de todos los comandos relacionados con la gestión de usuarios locales</h2>
+    <img src="image-1.png" alt="Comandos relacionados con LocalUser">
 
-El comando Set-Content sirve para modificar el contenido de un fichero, es como el comando nano en linux.
+    <h2>3. Muestra en el navegador la ayuda del comando Get-LocalUser</h2>
+    <img src="image-2.png" alt="Ayuda de Get-LocalUser en el navegador">
 
-5. Explica tres formas diferentes de ver o buscar un comando que hayas utilizado anteriormente en tu sesión.
+    <h2>4. Explicación del comando Set-Content</h2>
+    <p>El comando <code>Set-Content</code> se utiliza para modificar el contenido de un archivo. Es similar al comando <code>nano</code> en Linux, ya que permite sobrescribir el contenido de un archivo con una nueva información.</p>
 
-Se puede navegar con teclas Ctrl-R y Ctrl-S, la primera para buscar hacia atrás y la segunda para buscar hacia adelante, también con el comando Get-History(h) o con el comando Invoke-History(r).
+    <h2>5. Tres formas de ver o buscar un comando usado anteriormente</h2>
+    <ul>
+        <li>Usando <code>Ctrl + R</code> para buscar hacia atrás y <code>Ctrl + S</code> para buscar hacia adelante.</li>
+        <li>Utilizando el comando <code>Get-History</code> (o simplemente <code>h</code>).</li>
+        <li>Ejecutando <code>Invoke-History</code> (o <code>r</code>) para volver a ejecutar un comando del historial.</li>
+    </ul>
 
-6. Averigua si el comando Get-Process tienen un parámetro llamado ComputerName y en caso afirmativo explica para qué sirve.
+    <h2>6. Parámetro <code>ComputerName</code> en Get-Process</h2>
+    <p>El comando <code>Get-Process</code> tiene un parámetro llamado <code>ComputerName</code>, que permite obtener los procesos en equipos remotos.</p>
 
-Sí, tiene el parámetro ComputerName, y sirve para obtener procesos en equipos remotos.
+    <h2>7. Muestra la ayuda del comando Start-VM en una ventana emergente</h2>
+    <img src="image-3.png" alt="Ayuda de Start-VM en ventana emergente">
 
-7. Muestra la ayuda del comando Start-VM en una ventana emergente.
-![alt text](image-3.png)
+    <h2>8. Muestra la ayuda del comando Get-Help en el navegador</h2>
+    <img src="image-4.png" alt="Ayuda de Get-Help en el navegador">
 
-8. Muestra la ayuda del comando Get-Help en el navegador invocándolo desde la línea de comandos.
-![alt text](image-4.png)
+    <h2>9. Muestra las últimas 20 entradas del historial</h2>
+    <img src="Captura de pantalla 2025-02-01 203149.png" alt="Últimas 20 entradas del historial">
 
-9. Muestra las últimas 20 entradas del historial.
-![alt text](image-5.png)
 
-10. Elimina las entradas 10, 12 y 14 de tu historial.
-![alt text](image-6.png)
+    <h2>10. Elimina las entradas 10, 12 y 14 del historial</h2>
+    <img src="image-6.png" alt="Eliminación de entradas del historial">
+
+</body>
+</html>

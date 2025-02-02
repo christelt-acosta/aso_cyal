@@ -1,33 +1,63 @@
-# PR0403: El pipeline en Powershell
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR0403: El pipeline en PowerShell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
 
-1. El comando Get-Date muestra la fecha y hora actual. Muestra por pantalla únicamente el año en que estamos
-![alt text](image-25.png)
+    <h1>PR0403: El pipeline en PowerShell</h1>
 
-2. Uno de los requisitos de Windows 11 es que es procesador tenga TPM habilitado. Powershell dispone del comando Get-TPM que nos muestra información sobre este módulo. Muestra por pantalla, en formato tabla, las propiedades TpmPresent, TpmReady, TpmEnabled y TpmActivated.
-![alt text](image-26.png)
+    <h2>1. Mostrar únicamente el año actual con Get-Date</h2>
+    <img src="image-25.png" alt="Salida de Get-Date mostrando el año actual">
 
-*En los siguientes ejercicios trabajaremos con los ficheros devueltos por el comando Get-ChildItem C:\Windows\System32.*
+    <h2>2. Mostrar información del TPM en formato tabla</h2>
+    <p>Propiedades: <code>TpmPresent</code>, <code>TpmReady</code>, <code>TpmEnabled</code> y <code>TpmActivated</code>.</p>
+    <img src="image-26.png" alt="Salida de Get-TPM en formato tabla">
 
-    1. Muestra por pantalla el número de ficheros y directorios que hay en ese directorio.
-    ![alt text](image-27.png)
+    <h2>Ejercicios con los ficheros de <code>C:\Windows\System32</code></h2>
 
-    2. Los objetos devueltos por el comando anterior tienen una propiedad denominada Extension, que indica la extensión del archivo. Calcula el número de ficheros en el directorio que tienen la extensión .dll.
-    ![alt text](image-29.png)
+    <h3>2.1 Contar el número de ficheros y directorios en <code>C:\Windows\System32</code></h3>
+    <img src="image-27.png" alt="Número de ficheros y directorios en System32">
 
-    3. Muestra los ficheros del directorio con extensión .exe que tengan un tamaño superior a 50000 bytes.
-    ![alt text](image-30.png)
+    <h3>2.2 Contar los ficheros con extensión .dll</h3>
+    <img src="image-29.png" alt="Número de archivos .dll en System32">
 
-    4. Muestra los ficheros de este directorio que tengan extensión .dll, ordenados por fecha de creación y mostrando únicamente las propiedades de fecha de creación (CreationTime), último acceso (LastAccessTime) y nombre (Name).
-    ![alt text](image-31.png)
+    <h3>2.3 Mostrar los archivos .exe con un tamaño superior a 50000 bytes</h3>
+    <img src="image-30.png" alt="Archivos .exe mayores a 50000 bytes en System32">
 
-    5. Muestra el tamaño (Length) y nombre completo (FullName) de todos los ficheros del directorio ordenados por tamaño en sentido descendente.
-    ![alt text](image-32.png)
+    <h3>2.4 Listar archivos .dll ordenados por fecha de creación</h3>
+    <p>Propiedades mostradas: <code>CreationTime</code>, <code>LastAccessTime</code> y <code>Name</code>.</p>
+    <img src="image-31.png" alt="Archivos .dll ordenados por fecha de creación">
 
-    6. Muestra el tamaño y nombre completo de todos los ficheros del directorio que tengan un tamaño superior a 10MB (10000000 bytes) ordenados por tamaño.
-    ![alt text](image-33.png)
+    <h3>2.5 Mostrar tamaño y nombre completo de los ficheros ordenados por tamaño</h3>
+    <img src="image-32.png" alt="Ficheros ordenados por tamaño descendente">
 
-    7. Muestra el tamaño y nombre completo de todos los ficheros del directorio que tengan un tamaño superior a 10MB y extensión .exe ordenados por tamaño.
+    <h3>2.6 Mostrar archivos con tamaño superior a 10MB ordenados por tamaño</h3>
+    <img src="image-33.png" alt="Archivos mayores a 10MB ordenados por tamaño">
 
-
-
-
+    <h3>2.7 Mostrar archivos .exe con tamaño superior a 10MB ordenados por tamaño</h3>
+    <img src="Captura de pantalla 2025-02-01 205523.png" alt="archivos .exe con tamaño superior a 10MB">
+</body>
+</html>

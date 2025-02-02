@@ -1,64 +1,92 @@
-# PR0402: Introducción a powershell(II)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR0402: Introducción a PowerShell (II)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
 
-1. Visualiza las últimas cinco entradas del historial, mostrando para cada una el comando, la hora en que finalizó su ejecución y el estado de ejecución.
-![alt text](image-17.png)
+    <h1>PR0402: Introducción a PowerShell (II)</h1>
 
-2. Ejecuta el comando Get-Command (que muestra todos los comandos disponibles en Powershell) e interrúmpelo antes de que finalice su ejecución pulsando las teclas Ctrl-C. A continuación, ejecútalo dejando que finalice correctamente.
+    <h2>1. Últimas cinco entradas del historial con detalles</h2>
+    <img src="image-17.png" alt="Últimas cinco entradas del historial">
 
-Comando Get-Command interrumpido:
-![alt text](image-8.png)
+    <h2>2. Ejecución e interrupción de Get-Command</h2>
+    <p><strong>Comando Get-Command interrumpido:</strong></p>
+    <img src="image-8.png" alt="Get-Command interrumpido">
+    <p><strong>Comando Get-Command finalizado correctamente:</strong></p>
+    <img src="image-9.png" alt="Get-Command completo">
 
-Comando Get-Command completo:
-![alt text](image-9.png)
+    <h2>3. Diferentes estados de ejecución en el historial</h2>
+    <img src="image-10.png" alt="Diferentes estados de ejecución">
 
-3. Vuelve a ejecutar el comando del punto 1 y comprueba las diferentes salidas de finalización de estado de ejecución.
-![alt text](image-10.png)
+    <h2>4. Mostrar procesos con el nombre msedge</h2>
+    <p>(En este caso, se usó iexplore porque no había Microsoft Edge en el servidor).</p>
+    <img src="image-11.png" alt="Procesos iexplore">
 
-4. Muestra todos los procesos con el nombre msedge mostrando para cada uno el identificador, el consumo de CPU y los hilos (threads)
+    <h2>5. Función del parámetro -Delimiter en Export-CSV</h2>
+    <p>El parámetro <code>-Delimiter</code> permite definir un separador en el archivo CSV. Por defecto, es una coma (,).</p>
 
-Lo hice con el proceso iexplore porque el servidor no tiene microsoft edge.
-![alt text](image-11.png)
+    <h2>6. Mostrar la ayuda del comando Get-History en una ventana</h2>
+    <img src="image-12.png" alt="Ayuda de Get-History">
 
-5. Averigua para qué sirve el parámetro -Delimiter del comando Export-CSV
+    <h2>7. Listar todos los comandos con el verbo Update</h2>
+    <img src="image-13.png" alt="Comandos con verbo Update">
 
-El parámetro -Delimiter sirve para separar valores de las propiedades del archivo csv, por defecto es una coma(,).
+    <h2>8. Ejecutar Recortes y localizarlo con Get-Process</h2>
+    <img src="image-14.png" alt="Proceso SnippingTool.exe">
 
-6. Muestra en una ventana la ayuda del comando Get-History
-![alt text](image-12.png)
+    <h2>9. Propiedades de los procesos con Get-Process</h2>
+    <img src="image-18.png" alt="Propiedades de Get-Process">
 
-7. Muestra un listado con todos los comandos que tengan el verbo Update.
-![alt text](image-13.png)
+    <h2>10. Función del parámetro -MemberType en Get-Member</h2>
+    <p>El parámetro <code>-MemberType</code> permite especificar el tipo de miembro que devuelve el comando.</p>
 
-8. Ejecuta la herramienta Recortes y localízala usando el comando Get-Process teniendo en cuenta que el proceso se llama SnippingTool.exe
-![alt text](image-14.png)
+    <h2>11. Finalizar la ejecución de la herramienta Recortes</h2>
+    <img src="image-15.png" alt="Finalización de SnippingTool.exe">
 
-9. Averigua qué propiedades tienen los procesos devueltos con el comando Get-Process.
-![alt text](image-18.png)
+    <h2>12. Mostrar todos los procesos con el nombre svchost</h2>
+    <img src="image-16.png" alt="Procesos svchost">
 
-10.Busca en la ayuda para qué sirve el parámetro -MemberType del comando Get-Member.
+    <h2>13. Contar el número de instancias del proceso svchost</h2>
+    <img src="image-19.png" alt="Número de instancias svchost">
 
-El parámetro -MemberType sirve para especificar el tipo de miembro que obtiene el comando.
+    <h2>14. Listar procesos svchost con detalles en tabla</h2>
+    <img src="image-20.png" alt="Tabla de procesos svchost">
 
-11. Desde la línea de comandos, finaliza la ejecución de la herramienta Recortes.
-![alt text](image-15.png)
+    <h2>15. Listar procesos svchost ordenados por tiempo total de procesador</h2>
+    <img src="image-21.png" alt="Procesos svchost ordenados por CPU">
 
-12. Muestra todos los procesos que tienen el nombre svchost.
-![alt text](image-16.png)
+    <h2>16. Mostrar usuarios del sistema agrupados por la propiedad Enabled</h2>
+    <img src="image-23.png" alt="Usuarios agrupados por Enabled">
 
-13. Muestra por pantalla el número de instancias del proceso svchost.
-![alt text](image-19.png)
+    <h2>17. Listar usuarios con la cuenta habilitada</h2>
+    <img src="image-22.png" alt="Usuarios con Enabled=True">
 
-14. Muestra por pantalla todos los procesos con el nombre svchost mostrando para cada uno: nombre, identificador, hora de inicio, tiempo total de procesador y clase de prioridad. Se deben mostrar de forma tabular.
-![alt text](image-20.png)
+    <h2>18. Listar usuarios con la fecha de su último inicio de sesión</h2>
+    <img src="image-24.png" alt="Usuarios y última fecha de inicio de sesión">
 
-15. Repite la búsqueda anterior, pero ordenando por el campo tiempo total de procesador en sentido descendente.
-![alt text](image-21.png)
+</body>
+</html>
 
-16. Muestra los usuarios que hay en el sistema agrupándolos por la propiedad Enabled.
-![alt text](image-23.png)
-
-17. Muestra los usuarios que hay en el sistema con la cuenta habilitada (propiedad Enabled puesta a True). Utiliza el filtrado con el comando Where-Object
-![alt text](image-22.png)
-
-18. Muestra un listado de todos los usuarios del sistema con el nombre y la fecha de la última vez que iniciaron sesión (tienes que buscar la propiedad que indique último inicio de sesión o last logon)
-![alt text](image-24.png)
