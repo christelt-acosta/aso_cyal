@@ -1,44 +1,55 @@
-EJERCICIO 1:
-    #!/bin/bash
-    echo "Selecciona una operacion: 
-            1) suma
-            2) resta
-            3) multiplicacion
-            4) division "
-    read op
-    case $op in
-            1)
-            echo "Escribe el primer numero: "
-            read a
-            echo "Escribe el segundo numero: "
-            read b
-            echo "La suma de $a + $b es "$(($a+$b));;
-            2)
-            echo  "Escribe el primer numero: "
-            read a
-            echo "Escribe el segundo numero"
-            read b
-            echo "La resta de $a - $b es " $(($a-$b));;
-            3)
-            echo "Escribe el primer numero: "
-            read a
-            echo "Escribe el segundo numero: "
-            read b
-            echo "La multiplicacion de $a * $b es "$(($a*$b));;
-            4)
-            echo "Escribe el primer numero: "
-            read a 
-            echo "Escribe el segundo numero: "
-            read b
-            echo "La division de $a / $b es "$(($a/$b));;
-            *)
-            echo "Has introducido una opcion invalida";;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios en Bash</title>
+</head>
+<body>
 
-    esac
-
-EJERCICIO 2:
+    <h2>Ejercicio 1: Calculadora</h2>
+    <pre><code>
 #!/bin/bash
-read - p "Dime el nombre del archivo:" file
+echo "Selecciona una operación: 
+        1) suma
+        2) resta
+        3) multiplicación
+        4) división "
+read op
+case $op in
+        1)
+        echo "Escribe el primer número: "
+        read a
+        echo "Escribe el segundo número: "
+        read b
+        echo "La suma de $a + $b es "$(($a+$b));;
+        2)
+        echo "Escribe el primer número: "
+        read a
+        echo "Escribe el segundo número: "
+        read b
+        echo "La resta de $a - $b es " $(($a-$b));;
+        3)
+        echo "Escribe el primer número: "
+        read a
+        echo "Escribe el segundo número: "
+        read b
+        echo "La multiplicación de $a * $b es "$(($a*$b));;
+        4)
+        echo "Escribe el primer número: "
+        read a 
+        echo "Escribe el segundo número: "
+        read b
+        echo "La división de $a / $b es "$(($a/$b));;
+        *)
+        echo "Has introducido una opción inválida";;
+esac
+    </code></pre>
+
+    <h2>Ejercicio 2: Identificar Tipo de Archivo</h2>
+    <pre><code>
+#!/bin/bash
+read -p "Dime el nombre del archivo: " file
 extension="${file##*.}"
 case "$extension" in
     txt)
@@ -51,8 +62,10 @@ case "$extension" in
         echo "El archivo tiene una extensión diferente a .txt, .zip o .tar ."
         ;;
 esac
+    </code></pre>
 
-EJERCICIO 3:
+    <h2>Ejercicio 3: Conversión de Unidades</h2>
+    <pre><code>
 #!/bin/bash
 echo "Selecciona una opción para convertir:"
 echo "1. Metros a Kilómetros"
@@ -85,8 +98,10 @@ case $opcion in
         echo "Opción no válida."
         ;;
 esac
+    </code></pre>
 
-EJERCICIO 4:
+    <h2>Ejercicio 4: Control del Sistema</h2>
+    <pre><code>
 #!/bin/bash
 echo "Selecciona una opción:"
 echo "1. Apagar el sistema"
@@ -110,10 +125,12 @@ case $opcion in
         echo "Opción no válida."
         ;;
 esac
+    </code></pre>
 
-EJERCICIO 5:
+    <h2>Ejercicio 5: Días de la Semana</h2>
+    <pre><code>
 #!/bin/bash
-read -p "Dime un número entre 1 y 7:" numero
+read -p "Dime un número entre 1 y 7: " numero
 case $numero in
     1) echo "Lunes" ;;
     2) echo "Martes" ;;
@@ -126,10 +143,12 @@ case $numero in
         echo "Número incorrecto."
         ;;
 esac
+    </code></pre>
 
-EJERCICIO 6:
+    <h2>Ejercicio 6: Calificaciones</h2>
+    <pre><code>
 #!/bin/bash
-read -p "Dime una calificación:" calificacion
+read -p "Dime una calificación: " calificacion
 case $calificacion in
     [9-10])
         echo "Sobresaliente"
@@ -144,13 +163,15 @@ case $calificacion in
         echo "Suspenso"
         ;;
     *)
-	echo "Calificación inválida"
-	;;
+        echo "Calificación inválida"
+        ;;
 esac
+    </code></pre>
 
-EJERCICIO 7:
+    <h2>Ejercicio 7: Número Positivo o Negativo</h2>
+    <pre><code>
 #!/bin/bash
-read -p "Dime un número:" numero
+read -p "Dime un número: " numero
 case $numero in
     [0])
         echo "Cero"
@@ -166,10 +187,12 @@ case $numero in
         echo "Número no válido"
         ;;
 esac
+    </code></pre>
 
-EJERCICIO 8:
+    <h2>Ejercicio 8: Control de Servicios</h2>
+    <pre><code>
 #!/bin/bash
-read -p "Introduce el nombre del servicio:" servicio
+read -p "Introduce el nombre del servicio: " servicio
 echo "Selecciona una opción:"
 echo "1. Iniciar el servicio"
 echo "2. Detener el servicio"
@@ -204,4 +227,7 @@ case $opcion in
         echo "Opción no válida."
         ;;
 esac
+    </code></pre>
 
+</body>
+</html>

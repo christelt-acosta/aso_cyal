@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Bash - Entrada y Salida de Datos</title>
+</head>
+<body>
+
+    <h2>1. Buscar palabra en archivo</h2>
+    <pre><code>
+#!/bin/bash
+if [ $# -ne 2 ]; then
+    echo "Uso: $0 archivo palabra"
+    exit 1
+fi
+grep "$2" "$1"
+    </code></pre>
+
+    <h2>2. Contar palabras en un archivo</h2>
+    <pre><code>
+#!/bin/bash
+if [ $# -ne 1 ]; then
+    echo "Uso: $0 archivo"
+    exit 1
+fi
+wc -w < "$1"
+    </code></pre>
+
+    <h2>3. Suma de números en un archivo</h2>
+    <pre><code>
+#!/bin/bash
+if [ $# -ne 1 ]; then
+    echo "Uso: $0 archivo"
+    exit 1
+fi
+awk '{suma += $1} END {print "La suma total es:", suma}' "$1"
+    </code></pre>
+
+    <h2>4. Buscar datos de usuario por NIF en CSV</h2>
+    <pre><code>
+#!/bin/bash
+if [ $# -ne 1 ]; then
+    echo "Uso: $0 NIF"
+    exit 1
+fi
+while IFS=, read -r nif nombre apellidos ciclo modulo nota; do
+    if [[ $nif == "$1" ]]; then
+        echo "El alumno $nombre $apellidos tiene una calificación de $nota puntos en el módulo $modulo."
+    fi
+done < datos.csv
+    </code></pre>
+
+    <h2>5. Líneas con más de N caracteres</h2>
+    <pre><code>
+#!/bin/bash
+if [ $# -ne 2 ]; then
+    echo "Uso: $0 archivo N"
+    exit 1
+fi
+awk -v n="$2" 'length($0) > n' "$1"
+    </code></pre>
+
+    <h2>6. Estadísticas de archivos</h2>
+    <pre><code>
+#!/bin/bash
+if [ $# -lt 1 ]; then
+    echo "Uso: $0 archivo1 archivo2 ..."
+    exit 1
+fi
+for archivo in "$@"; do
+    echo "Archivo: $archivo"
+    echo "Líneas: $(wc -l < "$archivo")"
+    echo "Palabras: $(wc -w < "$archivo")"
+    echo "Caracteres: $(wc -m < "$archivo")"
+    echo "--------------------"
+done
+    </code></pre>
+
+</body>
+</html>
+
