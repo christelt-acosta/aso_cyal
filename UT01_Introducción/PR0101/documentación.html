@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 1 - Introducción a Vagrant</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 5px; border-radius: 5px; display: block; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Práctica 1 - Introducción a Vagrant</h1>
+    
+    <h2>Pasos que seguí</h2>
+    
+    <h3>1. Descargar Vagrant</h3>
+    <p>Descargar e instalar Vagrant desde su sitio oficial.</p>
+    
+    <h3>2. Verificar la lista de boxes</h3>
+    <p>Ejecutar el siguiente comando para ver qué boxes están instaladas:</p>
+    <code>vagrant box list</code>
+    <p>Como no hay ninguna, buscamos una en <strong>Vagrant Boxes</strong>. En este caso, elegimos <em>peru/my_ubuntu-20.04-server-amd64</em>.</p>
+    
+    <h3>3. Descargar el box</h3>
+    <p>Para descargar el box seleccionado:</p>
+    <code>vagrant box add peru/my_ubuntu-20.04-server-amd64</code>
+    
+    <h3>4. Crear Vagrantfile</h3>
+    <p>Primero, creamos una carpeta para la máquina virtual, luego ejecutamos:</p>
+    <code>vagrant init -m</code>
+    <p>Esto generará el archivo <strong>Vagrantfile</strong>.</p>
+    
+    <h3>5. Configurar el Vagrantfile</h3>
+    <p>Ejemplo de configuración del archivo <strong>Vagrantfile</strong>:</p>
+    <pre>
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "peru/my_ubuntu-20.04-server-amd64"
+    config.vm.hostname = "servercyal"
+    config.vm.synced_folder "./carpetadata", "/data", create=true
+    config.vm.provider "virtualbox" do |vb|
+        vb.name = "ubuntu server"
+        vb.memory = 2048
+        vb.cpus = 2
+    end
+end
+    </pre>
+    
+    <h3>6. Iniciar la máquina</h3>
+    <p>Para levantar la máquina, ejecutar:</p>
+    <code>vagrant up</code>
+    <p>Es importante estar en la carpeta donde está el <strong>Vagrantfile</strong> al ejecutar este comando.</p>
+    
+    <h3>7. ¡Máquina creada!</h3>
+    <p>Con esto, la máquina virtual está lista para usarse.</p>
+</body>
+</html>
+
+

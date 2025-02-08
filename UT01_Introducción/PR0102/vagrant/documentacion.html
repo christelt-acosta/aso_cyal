@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 2 - Entornos Multimáquina</title>
+</head>
+<body>
+    <h1>Práctica 2 - Entornos Multimáquina</h1>
+
+    <h2>Pasos que seguí</h2>
+    
+    <ol>
+        <li><strong>Verificar si tengo los boxes</strong>
+            <p>Necesito el box del Windows Server 2019 y el de un Windows 10. Para ello, hay que buscarlos en Vagrant boxes.</p>
+        </li>
+        <li><strong>Descargar los boxes</strong>
+            <p>Descargué el box 'StefanScherer/windows_2019' para el Windows Server 2019 y 'scotch/box' para el Windows 10. Los descargué con los siguientes comandos:</p>
+            <pre><code>vagrant box add StefanScherer/windows_2019</code></pre>
+            <pre><code>vagrant box add scotch/box</code></pre>
+        </li>
+        <li><strong>Iniciar el Vagrantfile</strong>
+            <p>Inicialicé el Vagrantfile con el comando <code>vagrant init</code>, luego lo edité de la siguiente manera:</p>
+            <pre><code>
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+    config.vm.define "win2019" do | w19|
+        w19.vm.box = "StefanScherer/windows_2019"
+        w19.vm.network "private_network", ip: "172.19.0.10" 
+        w19.vm.provider "virtualbox" do |vb|
+            vb.name = "windows server 2019"
+            vb.memory = 4192
+            vb.cpus = 4
+        end
+    end 
+
+    config.vm.define "win10" do | w10|
+        w10.vm.box = "gusztavvargadr/windows-10"
+        w10.vm.network "private_network", ip: "172.19.0.11" 
+        w10.vm.provider "virtualbox" do |vb|
+            vb.name = "windows 10"
+            vb.memory = 2048
+            vb.cpus = 2
+        end
+    end 
+
+end
+            </code></pre>
+        </li>
+        <li><strong>Conectividad</strong>
+            <p>Para que las máquinas estén conectadas entre sí y se vean con el anfitrión, se debe establecer una red privada en cada una de las máquinas.</p>
+        </li>
+        <li><strong>Iniciar las máquinas virtuales</strong>
+            <p>Para iniciar las máquinas virtuales que hemos configurado, usamos el comando <code>vagrant up</code> y se levantarán las dos máquinas.</p>
+        </li>
+        <li><strong>Conectarse con Vagrant</strong>
+            <p>Me conecté con el comando <code>vagrant ssh</code> seguido del nombre de la máquina:</p>
+            <pre><code>vagrant ssh win2019</code></pre>
+            <pre><code>vagrant ssh win10</code></pre>
+        </li>
+        <li><strong>Realizar pruebas de conectividad</strong>
+            <p>Realicé un <code>ping</code> entre el anfitrión y las dos máquinas virtuales que instalamos para verificar la conexión.</p>
+        </li>
+    </ol>
+</body>
+</html>
